@@ -7,9 +7,9 @@ def lcs(X,Y,m,n):
         return max(lcs(X,Y,m-1,n),lcs(X,Y,m,n-1))
     
 
-if __name__ == '__main__':
-    s1=input("enter the first string:")
-    s2=input("Enter the second string: ")
-    result=lcs(s1,s2,len(s1),len(s2))
-    print("len of lcs is: ",result)
+
+s1=input("enter the first string:")
+s2=input("Enter the second string: ")
+result=lcs(s1,s2,len(s1),len(s2))
+print("len of lcs is: ",result)
 
