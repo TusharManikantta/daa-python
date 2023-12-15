@@ -5,37 +5,31 @@ def find(parent, i):
 
 def union(parent, rank, x, y):
     if rank[x] < rank[y]:
-        parent[x] = y
+        parent[x], x, y = y, y, x
     elif rank[x] > rank[y]:
-        parent[y] = x
+        parent[y], x, y = x, y, x
     else:
-        parent[y] = x
-        rank[x] += 1
+        parent[y], rank[x] = x, rank[x] + 1
 
 def kruskalMST(vertices, edges):
-    result = []
-    i = 0
-    e = 0
-    edges = sorted(edges, key=lambda item: item[2])
-    parent = [node for node in range(vertices)]
-    rank = [0] * vertices
+    result, i, e = [], 0, 0
+    edges.sort(key=lambda item: item[2])
+    parent, rank = list(range(vertices)), [0] * vertices
 
     while e < vertices - 1:
         u, v, w = edges[i]
         i += 1
-        x = find(parent, u)
-        y = find(parent, v)
+        x, y = find(parent, u), find(parent, v)
         if x != y:
             e += 1
             result.append([u, v, w])
             union(parent, rank, x, y)
 
-    minimumCost = 0
+    minimumCost = sum(weight for u, v, weight in result)
     print("Edges in the constructed MST")
     for u, v, weight in result:
-        minimumCost += weight
         print("%d -- %d == %d" % (u, v, weight))
-    print("Minimum Spanning Tree", minimumCost)
+    print("Minimum Spanning Tree:", minimumCost)
 
 if __name__ == '__main__':
     vertices = int(input("Enter the number of vertices: "))
@@ -48,7 +42,6 @@ if __name__ == '__main__':
         if edge_input[0].lower() == 'done':
             break
 
-        u, v, w = map(int, edge_input)
-        edges.append([u, v, w])
+        edges.append(list(map(int, edge_input)))
 
     kruskalMST(vertices, edges)

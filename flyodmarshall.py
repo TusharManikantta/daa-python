@@ -1,40 +1,37 @@
-def floyd_warshall():
-    n = int(input("Enter the number of vertices: "))
+INF = float('inf')
 
-    # Replace 'inf' with a large integer value
-    inf_replacement = float('inf')  # or you can use a specific large value like 999999
-    G = []
-
-    # Take input for the adjacency matrix
-    print("Enter the adjacency matrix (Enter INF for infinity):")
-    for i in range(n):
-        row = input().split()
-        row = [inf_replacement if val.lower() == 'inf' else int(val) for val in row]
-        G.append(row)               
-
-    # Apply Floyd-Warshall algorithm
+def floyd_warshall(n, G):
     for k in range(n):
-        for i in range(n):  
+        for i in range(n):
             for j in range(n):
                 G[i][j] = min(G[i][j], G[i][k] + G[k][j])
+    print_solution(G)
 
-    # Print the resulting distances
-    print("\nShortest distances between all pairs of vertices:")
-    for i in range(n):
-        for j in range(n):
-            if G[i][j] == inf_replacement:
-                print("INF", end="  ")
-            else:
-                print(G[i][j], end="  ")
-        print()
+def print_solution(distance):
+    for i in range(len(distance)):
+        for j in range(len(distance[i])):
+            print(distance[i][j], end="  ")
+        print(" ")
 
-# Example input:
-# 4
-# 0 3 INF 5
-# 2 0 INF 4
-# INF 1 0 INF
-# INF INF 2 0
+# Get the size of the graph from the user
+n = int(input("Enter the number of vertices in the graph: "))
 
-# Call the function
-floyd_warshall()
-    
+# Get the adjacency matrix from the user
+G = []
+print("Enter the adjacency matrix (INF for infinity):")
+for i in range(n):
+    row = list(map(float, input().split()))
+    G.append(row)
+
+# Call the Floyd-Warshall algorithm with the user-provided graph
+floyd_warshall(n, G)
+
+# # Example input:
+# # 4
+# # 0 3 INF 5
+# # 2 0 INF 4
+# # INF 1 0 INF
+# # INF INF 2 0
+
+
+

@@ -15,6 +15,7 @@ string_input = input("Enter the string: ")
 min_char, max_char = find_min_max(string_input, 0, len(string_input) - 1)
 print(f"For string: Min char: {min_char}, Max char: {max_char}")
 
+
 num_input = [int(x) for x in input("Enter the numbers separated by space: ").split()]
 min_num, max_num = find_min_max(num_input, 0, len(num_input) - 1)
 print(f"For numbers: Min value: {min_num}, Max value: {max_num}")

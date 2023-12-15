@@ -20,8 +20,9 @@ def backtrack(row):
             board[row][col] = '.'
 board = [['.' for _ in range(n)] for _ in range(n)]
 solutions = []
-backtrack(0)
+backtrack(0)    
 print(solutions)
+
 
 
 

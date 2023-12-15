@@ -1,26 +1,23 @@
 import heapq
+def spanningTree( V, adj):
+    pq = [(0, 0)]  # (wt, node)
+    vis = [0] * V
+    total_weight = 0
 
-class Solution:
-    def spanningTree(self, V, adj):
-        pq = [(0, 0)]  # (wt, node)
-        vis = [0] * V
-        total_weight = 0
+    while pq:   
+        wt, node = heapq.heappop(pq)
+        if vis[node] == 1:
+            continue
 
-        while pq:
-            wt, node = heapq.heappop(pq)
+        vis[node] = 1
+        total_weight += wt
 
-            if vis[node] == 1:
-                continue
+        for neighbor in adj[node]:
+            adjNode, edgeWeight = neighbor[0], neighbor[1]
+            if not vis[adjNode]:
+                heapq.heappush(pq, (edgeWeight, adjNode))
 
-            vis[node] = 1
-            total_weight += wt
-
-            for neighbor in adj[node]:
-                adjNode, edgeWeight = neighbor[0], neighbor[1]
-                if not vis[adjNode]:
-                    heapq.heappush(pq, (edgeWeight, adjNode))
-
-        return total_weight
+    return total_weight
 
 if __name__ == "__main__":
     V = int(input("Enter the number of vertices: "))
@@ -38,6 +35,8 @@ if __name__ == "__main__":
         adj[it[0]].append([it[1], it[2]])
         adj[it[1]].append([it[0], it[2]])
 
-    obj = Solution()
-    result = obj.spanningTree(V, adj)
+    result = spanningTree(V, adj)
     print("The sum of all the edge weights:", result)
+
+
+

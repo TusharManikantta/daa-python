@@ -14,7 +14,7 @@ def matrixChainMemoised(p, i, j):
 
 def MatrixChainOrder(p, n):
     i = 1
-    j = n - 1
+    j = n - 1   
     return matrixChainMemoised(p, i, j)
 
 # Example of taking dynamic input

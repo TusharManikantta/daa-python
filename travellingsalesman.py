@@ -8,10 +8,10 @@ def tsp(graph):
         if mask==(1<<n)-1:
             return graph[pos][0]
         
-        if memo[pos][mask] is not None:
+        if memo[pos][mask] is not None: 
             return memo[pos][mask]
         
-        min_cost=INF
+        min_cost=INF    
 
         for next_city in range(n):
             if (mask>>next_city) & 1==0:

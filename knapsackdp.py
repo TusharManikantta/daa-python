@@ -11,4 +11,4 @@ max_weight = int(input("Enter the max weight: "))
 profits = list(map(int, input("Enter the profit array: ").split()))
 weights = list(map(int, input("Enter the weight array: ").split()))
 
-print(knapsack(weights, profits, max_weight))
+print(knapsack(weights, profits, max_weight))   
