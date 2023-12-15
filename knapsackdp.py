@@ -1,16 +1,14 @@
-def knapSack(W,wt,val,n):
-    dp=[0 for i in range(W+1)]
-    for i in range(1,n+1):
-        for w in range(W,0,-1):
-            if wt[i-1] <=w:
-                dp[w]= max(dp[w],dp[w]-wt[i-1]+val[i-1])
-    return dp[W]
+def knapsack(weights, profits, max_weight):
+  dp = [0] * (max_weight + 1)
+  for i in range(len(profits)):
+    for j in range(max_weight, -1, -1): 
+      if weights[i] <= j:
+        dp[j] = max(dp[j], dp[j - weights[i]] + profits[i])
 
+  return dp[max_weight]
 
-if __name__=='__main__':
-    n=int(input("enter the number of items: "))
-    profit=[int(x) for x in input("enter the profit seperated by space: ").split()]
-    weight=[int(x) for x in input("enter the weights seperated by space: ").split()]
-    W=int(input("Enter the knapsack capacity"))
+max_weight = int(input("Enter the max weight: "))
+profits = list(map(int, input("Enter the profit array: ").split()))
+weights = list(map(int, input("Enter the weight array: ").split()))
 
-    print(knapSack(W,weight,profit,n))
+print(knapsack(weights, profits, max_weight))
